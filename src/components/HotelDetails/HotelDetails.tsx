@@ -11,7 +11,6 @@ const HotelDetails: React.FC = () => {
 
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const hotelListInStorage = getDataFromStorage(STORAGEKEY);
-  console.log(id, hotelDetails)
   
   useEffect(() => {
     if(id) {
@@ -29,24 +28,6 @@ const HotelDetails: React.FC = () => {
         <>
         <div className="flex justify-center">
           {Object.keys(hotelDetails).length > 0 && (
-            // <div className="max-w-sm rounded overflow-hidden shadow-lg">
-            //   <img className="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/182.jpg" alt=""/>
-            //   <div className="px-6 py-4">
-            //     <div className="font-bold text-xl mb-2">{(hotelDetails as IHotelDetails)?.name}</div>
-            //     <p className="text-gray-700 text-base">
-            //       {(hotelDetails as IHotelDetails)?.address}
-            //     </p>
-            //   </div>
-            //   <div className="px-6 pt-1 pb-4">
-            //     <button 
-            //       type="button" 
-            //       className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-            //       onClick={() => setIsEditing(true)}
-            //     >Edit
-            //     </button>
-                
-            //   </div>
-            // </div>
             <section className="container mx-auto px-6 p-10 mt-20">
               <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">
                 {(hotelDetails as IHotelDetails)?.name}
@@ -72,16 +53,10 @@ const HotelDetails: React.FC = () => {
                   <img className="rounded-t-lg" src="https://mdbootstrap.com/img/new/standard/nature/182.jpg" alt=""/>
                 </div>
               </div>
-
             </section>
-
-
-
           )})
       
         </div>
-
-        
         </>
       }
     </>

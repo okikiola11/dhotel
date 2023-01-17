@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { createFormSchema } from "../../validations/FormValidation";
 import { IHotelDetails } from "../../interface/hotelInterface";
 import { data } from "../../models/country";
 import { IHotel } from "../../models/hotels";
@@ -13,7 +15,6 @@ const hotelListInStorage = getDataFromStorage(STORAGEKEY);
 
 // Both edit and create form
 const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
-  console.log(hotelData)
   const [name, setName] = useState<string>(hotelData?.name ?? '');
   const [selectedCountry, setSelectedCountry] = useState<string>(hotelData?.country ?? '');
   const [selectedState, setSelectedState] = useState<string>(hotelData?.state ?? '');
@@ -29,7 +30,7 @@ const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
     }
   }, [hotelListInStorage]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const onClickBack = () => navigate(-1);
 
@@ -64,7 +65,7 @@ const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
     e.preventDefault();
 
     const data: IHotel = {
-      id: hotelData ? hotelData.id : (new Date().toJSON().toString()),
+      id: hotelData ? hotelData.id : (Math.floor(Math.random() * 500)).toString(),
       name,
       city: selectedCity,
       state: selectedState,
@@ -73,6 +74,8 @@ const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
       //rating: selectedRating,
     };
 
+    console.log(data)
+
     saveDataToStroage(STORAGEKEY, [...hotelList, data]);
 
     setName('');
@@ -80,6 +83,8 @@ const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
     setSelectedCity('');
     setSelectedState('')
     setSelectedCity('');
+
+    navigate('/')
   }
 
   return (
@@ -152,7 +157,6 @@ const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
             <option>--Choose City--</option>
             {
               availableCities?.cities.map((city, key) => {
-                console.log(city)
                 return (
                   <option value={city} key={key}>{city}</option>   
                 );
@@ -194,7 +198,9 @@ const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
         </div>
         
         <div className="flex justify-between">
-          <button className="" onClick={onClickBack}>Back</button>
+          <button 
+            className="text-white bg-red-400 hover:bg-red-400 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" 
+            onClick={onClickBack}>Back</button>
           <button 
             type="submit" 
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
