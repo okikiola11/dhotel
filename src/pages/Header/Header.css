@@ -1,0 +1,5 @@
+.navbar {
+    @apply font-bold py-4 px-6 rounded text-white uppercase;
+    background-color: var(--nav__color);
+    outline: var(--btn__primary);
+}
