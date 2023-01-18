@@ -11,8 +11,6 @@ import { ratingOptions } from "../../models/rating";
 
 import './CreateHotel.css';
 
-const hotelListInStorage = getDataFromStorage(STORAGEKEY);
-
 // Both edit and create form
 const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
   const [name, setName] = useState<string>(hotelData?.name ?? '');
@@ -20,15 +18,18 @@ const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
   const [selectedState, setSelectedState] = useState<string>(hotelData?.state ?? '');
   const [selectedCity, setSelectedCity] = useState<string>(hotelData?.city ?? '');
   const [address, setAddress] = useState<string>(hotelData?.address ?? '');
-  const [selectedRating, setSelectedRating] = useState()
+  // const [selectedRating, setSelectedRating] = useState()
+  const hotelListInStorage = getDataFromStorage(STORAGEKEY);
 
   const [hotelList, setHotelList] = useState<Array<IHotelDetails>>([]);
+
+  let uuid = crypto.randomUUID();
 
   useEffect(() => {
     if(hotelListInStorage) {
       setHotelList(hotelListInStorage);
     }
-  }, [hotelListInStorage]);
+  }, []);
 
   const navigate = useNavigate();
 
@@ -60,12 +61,12 @@ const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
 
   const availableState = data.find((country) => country.name === selectedCountry);
   const availableCities = availableState?.states?.find((s) => s.name === selectedState);
-
+  
   const onSubmitHandler = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const data: IHotel = {
-      id: hotelData ? hotelData.id : (Math.floor(Math.random() * 500)).toString(),
+      id: hotelData ? hotelData?.id : uuid,
       name,
       city: selectedCity,
       state: selectedState,
@@ -74,17 +75,17 @@ const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
       //rating: selectedRating,
     };
 
-    console.log(data)
+    console.log(data);
+    
+    saveDataToStroage(STORAGEKEY, [data, ...hotelList])
+    navigate('/')
 
-    saveDataToStroage(STORAGEKEY, [...hotelList, data]);
 
     setName('');
     setAddress('');
     setSelectedCity('');
     setSelectedState('')
     setSelectedCity('');
-
-    navigate('/')
   }
 
   return (
@@ -171,7 +172,7 @@ const CreateHotel: React.FC<{hotelData?: IHotelDetails}> = ({hotelData}) => {
             id="rating" 
             className="formInput"
             placeholder="Hotel Rating"
-            value={selectedRating}
+            //value={selectedRating}
             onChange={ratingChangeHandler}
           >
                 <option>--Choose Hotel Rating--</option>

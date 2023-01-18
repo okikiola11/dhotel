@@ -8,13 +8,15 @@ const SearchHotel = ({setSearchList}: {setSearchList: React.Dispatch<React.SetSt
         const [searchValue, setSearchValue] = useState<string>('');
     
         const getItem = getDataFromStorage(STORAGEKEY);
+        console.log(getItem, 'get Data ------')
+        console.log(typeof getItem)
         
         const onSearchHandler = (event: ChangeEvent<HTMLInputElement>) => {
             setSearchValue(event.target.value);   
         }
     
         useEffect(() => {
-            const searchResult = getItem.filter((data) => data.name.toLowerCase().includes(searchValue));
+            const searchResult = getItem?.filter((data) => data?.name?.toLowerCase().includes(searchValue));
             setSearchList(searchResult);
         }, [searchValue])
       

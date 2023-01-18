@@ -5,5 +5,5 @@ export interface IHotelDetails {
     state: string;
     country: string;
     address: string;
-    rating: number;
+    //rating: number;
 }

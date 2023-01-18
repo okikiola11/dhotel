@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import SearchHotel from "../SeachHotel/SearchHotel";
 import { IHotel } from "../../models/hotels";
-import { getDataFromStorage } from "../../utils/helpers";
+import { getDataFromStorage, saveDataToStroage } from "../../utils/helpers";
 import { STORAGEKEY } from "../../utils/constants";
 
 interface IProps {
@@ -26,10 +26,11 @@ const HotelList: React.FC<IProps> = (props: IProps) => {
 
   
   const handleDelete = (id) => {
-    const hotelListInStorage = getDataFromStorage(STORAGEKEY);
-    const newList = hotelListInStorage.filter(li => li.id !== id);
+    //const hotelListInStorage = getDataFromStorage(STORAGEKEY);
+    const newList = search.filter(li => li.id !== id);
     
-    localStorage.setItem(STORAGEKEY, JSON.stringify(newList))
+    //localStorage.setItem(STORAGEKEY, JSON.stringify(newList))
+    saveDataToStroage(STORAGEKEY ,newList);
   };
 
   return (

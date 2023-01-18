@@ -4,18 +4,12 @@ import { getDataFromStorage } from "../../utils/helpers";
 import { IHotelDetails } from "../../interface/hotelInterface";
 
 const EditForm = ({hotelData}) => {
-    console.log(hotelData)
-  
     const [editDetail, setDetailEdit] = useState<IHotelDetails>();
     const hotelListInStorage = getDataFromStorage(STORAGEKEY);
 
     useEffect(() => {
         setDetailEdit(hotelData)
     }, [hotelData])
-
-    const onUpdateHandler = () => {
-        console.log('hello')
-    }
 
     return (
         <form className="w-full max-w-lg mt-40">
@@ -94,7 +88,7 @@ const EditForm = ({hotelData}) => {
                 </div>
             </div>
 
-            <button type="submit" onClick={onUpdateHandler}>Update</button>
+            <button type="submit">Update</button>
         </form>
 
     )
