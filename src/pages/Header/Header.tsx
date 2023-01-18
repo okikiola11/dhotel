@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHotel, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -9,20 +9,15 @@ import './Header.css';
 const Header = () => {
     const [ isOpen, setIsOpen ] = useState(false);
 
-    const navigate = useNavigate();
-
-    // const links = [
-    //     {name: 'ALL HOTELS', link: '/'},
-    //     {name:'CONTACT', Link: ':/contact'}
-    // ];
+    //const navigate = useNavigate();
 
     const handleClick = () => {
         setIsOpen(!isOpen);
     }
 
-    const handleBtnClick = () => {
-        navigate('/')
-    }
+    // const handleBtnClick = () => {
+    //     navigate('/')
+    // }
     
     return (
         <nav className='shadow-md w-full fixed top-0 left-0'>
@@ -31,7 +26,7 @@ const Header = () => {
                     <span className='text-3xl text-indigo-600 mr-1 pt-2'>
                         {/* Icons */}
                         <FontAwesomeIcon icon={faHotel} />
-                        <Link to={'/'}>AIRBNB</Link>
+                        <Link to={'/'} data-testid='header1'>AIRBNB</Link>
                     </span>
                 </div>
                 <div onClick={handleClick} className='absolute text-3xl absolute right-8 top-6 cursor-pointer'>

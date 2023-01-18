@@ -10,7 +10,6 @@ const Home: React.FC = () => {
   const [hotelList, setHotelList] = useState(dummyHotelList as IHotel[]);
 
   const getItem = getDataFromStorage(STORAGEKEY);
-  console.log(getItem);
 
   useEffect(() => {
     if(getItem) {

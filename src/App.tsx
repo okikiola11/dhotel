@@ -10,8 +10,7 @@ const App = () => {
   return (
     <div className="container-fluid mx-auto">
       <Header />
-      
-            
+           
       <Routes>   
           <Route path='/' element={<Home />} />                        
           <Route 
@@ -20,6 +19,7 @@ const App = () => {
           /> 
           <Route path='/hotels/:id' element={<HotelDetails />} />
       </Routes>
+
       <Footer />
 
     </div>
